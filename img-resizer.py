@@ -4,7 +4,7 @@ import cv2
 
 import numpy as np
 
-paths = [["C:\school\minor-ai\lettuce-cnn\data\DepthImages" , "C:\school\minor-ai\lettuce-cnn\data\DepthImagesResize"],["C:\school\minor-ai\lettuce-cnn\data\RGBImages", "C:\school\minor-ai\lettuce-cnn\data\RGBImagesResize"]]
+paths = [[".\data\DepthImages" , ".\data\DepthImagesResize"],[".\data\RGBImages", ".\data\RGBImagesResize"]]
 
 for set in paths:
     for item in os.listdir(set[0]):
