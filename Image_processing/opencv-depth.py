@@ -17,7 +17,7 @@ def depth_image_properties(img_path):
 def depth_image_to_grayscale(img_path):
     depth_image = iio.imread(img_path)
     depth_instensity = np.array(256 * depth_image / 0x0fff,dtype=np.uint8)
-    iio.imwrite('./data/GrayScaleImages/grayscale-150.png', depth_instensity)
+    iio.imwrite('../data/GrayScaleImages/grayscale-150.png', depth_instensity)
 
 def get_distance_camera_plant(img_path):
     # dont really know if this is working?
