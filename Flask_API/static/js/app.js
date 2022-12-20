@@ -12,7 +12,7 @@ function loadPage(route) {
 }
 
 $(document).ready(function () {
-    $("#root").load("../templates/views/home.html", function (statusTxt, jqXHR) {
+    $("#root").load("../templates/home.html", function (statusTxt, jqXHR) {
         if (statusTxt == "success") {
             alert("New content loaded successfully!");
         }
@@ -39,19 +39,10 @@ function loadFile(event) {
     document.getElementById('output').src = image;
 };
 
-function checkExist(elementId) {
-    setInterval(function () {
-        if ($(elementId).length) {
-            console.log("Exists!");
-            clearInterval(checkExist);
-            document.getElementById('elementId').src = image
-        }
-    }, 100);
+function extractFeatures() {
+    loadPage('../templates/extraction.html')
 }
 
-
-function extractFeatures() {
-    console.log(image)
-    loadPage('../templates/extraction.html')
-    checkExist('extractionImage')
+function showResult() {
+    loadPage('../templates/result.html')
 }

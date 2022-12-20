@@ -1,3 +1,7 @@
-<input type="file" accept="image/*" onchange="loadFile(event)" />
-<p><img id="output" width="200" /></p>
-<button onclick="extractFeatures()">Extract features</button>
+<div class="home__wrapper">
+  <label class="custom-file-upload">
+    <input type="file" accept="image/*" onchange="loadFile(event)" />
+    Choose image
+  </label>
+  <button onclick="extractFeatures()">Extract features</button>
+</div>
