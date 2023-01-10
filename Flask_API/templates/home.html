@@ -1,7 +1,11 @@
 <div class="home__wrapper">
   <label class="custom-file-upload">
-    <input type="file" accept="image/*" onchange="loadFile(event)" />
-    Choose image
+    <input type="file" accept="image/*" onchange="loadRGBFile(event)" />
+    Choose RGB image
+  </label>
+  <label class="custom-file-upload">
+    <input type="file" accept="image/*" onchange="loadDepthFile(event)" />
+    Choose Depth image
   </label>
   <button onclick="extractFeatures()">Extract features</button>
 </div>
