@@ -22,8 +22,11 @@ def index():
 def predict_image():
     rgb = flask.request.files.get('rgb', '')
     depth = flask.request.files.get('depth', '')
-    rgb = Data.process_img(rgb)
-    depth = depth.process_img(rgb)
+    
+    data = Data()
+    
+    rgb = data.process_img(rgb)
+    depth = data.process_img(depth)
 
     plant_values = {'diameter': diameter.predict(rgb),
                     'height': height.predict(depth),

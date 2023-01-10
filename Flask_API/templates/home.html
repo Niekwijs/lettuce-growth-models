@@ -20,19 +20,31 @@
       <p><img id="outputDepth" width="200" /></p>
       <div id="root">
         <div class="home__wrapper">
-          <label class="custom-file-upload">
-            <input type="file" accept="image/*" onchange="loadRGBFile(event)" />
-            Choose RGB image
-          </label>
-          <label class="custom-file-upload">
-            <input
-              type="file"
-              accept="image/*"
-              onchange="loadDepthFile(event)"
-            />
-            Choose Depth image
-          </label>
-          <a href="image">Extract features</a>
+          <form action="{{ url_for('predict_image') }}" enctype=multipart/form-data method="post">
+            <label class="custom-file-upload">
+              <input
+                type="file"
+                accept="image/*"
+                onchange="loadRGBFile(event)"
+                name="rgb"
+              />
+              Choose RGB image
+            </label>
+            <label class="custom-file-upload">
+              <input
+                type="file"
+                accept="image/*"
+                onchange="loadDepthFile(event)"
+                name="depth"
+              />
+              Choose Depth image
+            </label>
+
+            <label class="custom-file-upload">
+              <input type="submit" />
+              Extract features
+            </label>
+          </form>
         </div>
       </div>
     </div>

@@ -18,6 +18,7 @@ class Data:
         return df
 
     def process_img(self, img):
+        img = np.fromstring(img, np.uint8)
         img = cv2.resize(img, (250, 250))
         img.astype(np.float32) / 255.0
         img = tf.convert_to_tensor(img)
