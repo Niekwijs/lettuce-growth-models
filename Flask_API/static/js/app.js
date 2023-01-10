@@ -1,4 +1,7 @@
-var image = ''
+var images = {
+    rgb: '',
+    depth: ''
+}
 
 function loadPage(route) {
     $("#root").load(route, function (statusTxt, jqXHR) {
@@ -34,13 +37,22 @@ $(document).ready(function () {
     });
 });
 
-function loadFile(event) {
-    image = URL.createObjectURL(event.target.files[0]);
-    document.getElementById('output').src = image;
+function loadRGBFile(event) {
+    images.rgb = URL.createObjectURL(event.target.files[0]);
+    document.getElementById('outputRGB').src = images.rgb;
+};
+
+function loadDepthFile(event) {
+    images.depth = URL.createObjectURL(event.target.files[0]);
+    document.getElementById('outputDepth').src = images.depth;
 };
 
 function extractFeatures() {
-    loadPage('../templates/extraction.html')
+    $.post("/image", {
+        rgb: images.rgb,
+        depth: images.depth
+    })
+    // loadPage('../templates/extraction.html')
 }
 
 function showResult() {

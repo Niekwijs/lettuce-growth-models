@@ -1,11 +1,42 @@
-<div class="home__wrapper">
-  <label class="custom-file-upload">
-    <input type="file" accept="image/*" onchange="loadRGBFile(event)" />
-    Choose RGB image
-  </label>
-  <label class="custom-file-upload">
-    <input type="file" accept="image/*" onchange="loadDepthFile(event)" />
-    Choose Depth image
-  </label>
-  <button onclick="extractFeatures()">Extract features</button>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Plantgroei UI</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="../static/css/index.css" />
+  </head>
+
+  <header>
+    <button type="button" id="extraction-button">Extraction</button>
+    <button type="button" id="home-button">Home</button>
+    <button type="button" id="result-button">Result</button>
+  </header>
+  <body>
+    <div id="content-wrapper">
+      <p><img id="outputRGB" width="200" /></p>
+      <p><img id="outputDepth" width="200" /></p>
+      <div id="root">
+        <div class="home__wrapper">
+          <label class="custom-file-upload">
+            <input type="file" accept="image/*" onchange="loadRGBFile(event)" />
+            Choose RGB image
+          </label>
+          <label class="custom-file-upload">
+            <input
+              type="file"
+              accept="image/*"
+              onchange="loadDepthFile(event)"
+            />
+            Choose Depth image
+          </label>
+          <a href="image">Extract features</a>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <script src="../static/js/app.js"></script>
+</html>
