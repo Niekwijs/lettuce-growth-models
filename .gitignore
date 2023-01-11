@@ -7,4 +7,5 @@ share/
 etc/
 tmp/
 models/
+Flask_API/__pycache__
 
