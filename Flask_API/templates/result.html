@@ -1,1 +1,25 @@
-<div>Time until harvest:</div>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Plantgroei UI</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="../static/css/index.css" />
+  </head>
+
+  <body>
+    <div id="content-wrapper">
+      <div class="result__wrapper">
+        <div>Expected harvest date</div>
+        <div>{{ result_time }}</div>
+      </div>
+      <p><img id="outputRGB" width="200" /></p>
+      <p><img id="outputDepth" width="200" /></p>
+      <div id="root"></div>
+    </div>
+  </body>
+
+  <script src="../static/js/app.js"></script>
+</html>

@@ -9,12 +9,6 @@
     <link rel="stylesheet" href="../static/css/index.css" />
   </head>
 
-  <header>
-    <button type="button" id="extraction-button">Extraction</button>
-    <button type="button" id="home-button">Home</button>
-    <button type="button" id="result-button">Result</button>
-  </header>
-
   <body>
     <div id="content-wrapper">
       <p><img id="outputRGB" width="200" /></p>
@@ -24,26 +18,31 @@
           <div class="extractionImage__data-wrapper">
             <div class="extractionImage__data-item">
               <div class="data-item__title">Diameter:</div>
-              <div class="data-item__value">{{ plant_values }}</div>
+              <div class="data-item__value">{{ result_plant.diameter }}</div>
             </div>
             <div class="extractionImage__data-item">
               <div class="data-item__title">Fresh weight shoot:</div>
-              <div class="data-item__value">99</div>
+              <div class="data-item__value">{{ result_plant.height }}</div>
             </div>
             <div class="extractionImage__data-item">
               <div class="data-item__title">Leaf area:</div>
-              <div class="data-item__value">99</div>
+              <div class="data-item__value">{{ result_plant.leaf_area }}</div>
             </div>
             <div class="extractionImage__data-item">
               <div class="data-item__title">Dry weight shoot:</div>
-              <div class="data-item__value">99</div>
+              <div class="data-item__value">{{ result_plant.freshweight }}</div>
             </div>
             <div class="extractionImage__data-item">
               <div class="data-item__title">Leaf area:</div>
-              <div class="data-item__value">99</div>
+              <div class="data-item__value">{{ result_plant.dryweight }}</div>
             </div>
           </div>
-          <button onclick="showResult()">Show result</button>
+          <form action="{{ url_for('predict_harvest') }}" enctype=multipart/form-data method="post">
+            <label class="custom-file-upload">
+              <input type="submit" />
+                Show result
+            </label>
+          </form>
         </div>
       </div>
     </div>

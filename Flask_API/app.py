@@ -20,29 +20,38 @@ def index():
 
 @app.route('/image', methods=['POST'])
 def predict_image():
-    rgb = flask.request.files.get('rgb', '')
-    depth = flask.request.files.get('depth', '')
+    # TODO Below code has been commented for front-end development purposes
+    # rgb = flask.request.files.get('rgb', '')
+    # depth = flask.request.files.get('depth', '')
     
-    data = Data()
+    # data = Data()
     
-    rgb = data.process_img(rgb)
-    depth = data.process_img(depth)
+    # rgb = data.process_img(rgb)
+    # depth = data.process_img(depth)
 
-    plant_values = {'diameter': diameter.predict(rgb),
-                    'height': height.predict(depth),
-                    'leaf_area': leaf_area.predict(rgb),
-                    'freshweight': fresh_weight.predict(np.dstack((rgb.numpy(), depth.numpy()))),
-                    'dryweight': dry_weight.predict(rgb)}
+    # plant_values = {'diameter': diameter.predict(rgb),
+    #                 'height': height.predict(depth),
+    #                 'leaf_area': leaf_area.predict(rgb),
+    #                 'freshweight': fresh_weight.predict(np.dstack((rgb.numpy(), depth.numpy()))),
+    #                 'dryweight': dry_weight.predict(rgb)}
+    
+    # TODO Remove test data and replace it with functioning values
+    plant_values = {'diameter': 'diameter test',
+                    'height': 'height test',
+                    'leaf_area': 'leaf area test',
+                    'freshweight': 'fresh weight test',
+                    'dryweight': 'dry weight test'}
     return flask.render_template('extraction.html', result_plant=plant_values)
 
 
 @app.route('/harvest', methods=['POST'])
 def predict_harvest():
-    form_values = (
-        flask.request.form.get('species'), flask.request.form.get('height'), flask.request.form.get('diameter'),
-        flask.request.form.get('leafarea'), flask.request.form.get('freshweight'), flask.request.form.get('dryweight'))
+    # TODO Below code has been commented for front-end development purposes
+    # form_values = (
+    #     flask.request.form.get('species'), flask.request.form.get('height'), flask.request.form.get('diameter'),
+    #     flask.request.form.get('leafarea'), flask.request.form.get('freshweight'), flask.request.form.get('dryweight'))
 
-    processed = Data.process_plant_values(form_values)
+    # processed = Data.process_plant_values(form_values)
 
     # TODO load model, make pred
     predicted_date = '11/09/2001'

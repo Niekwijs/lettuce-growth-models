@@ -60,7 +60,7 @@ button:hover, .custom-file-upload:hover {
     cursor: pointer;
 }
 
-input[type="file"] {
+input[type="submit"], input[type="file"] {
     display: none;
 }
 
@@ -74,6 +74,11 @@ img {
 .home__wrapper {
     display: flex;
     justify-content: center;
+}
+
+.result__wrapper {
+    display: flex;
+    flex-direction: row;
 }
 
 #content-wrapper {
