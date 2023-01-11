@@ -1,3 +1,5 @@
+import random
+
 import flask
 
 from Flask_API.tabular_predictor import tabular_predictor
@@ -8,6 +10,7 @@ import numpy as np
 app = flask.Flask(__name__, template_folder='./templates')
 
 print('Loading models...')
+# TODO: Load these from disk
 # diameter = tf.keras.models.load_model('../Plant_variable_predictor/checkpoints/rgb_diameter')
 # height = tf.keras.models.load_model('../Plant_variable_predictor/checkpoints/depth_height')
 # leaf_area = tf.keras.models.load_model('../Plant_variable_predictor/checkpoints/rgb_augm_leafarea')
@@ -40,33 +43,25 @@ def predict_image():
     #                 'dryweight': dry_weight.predict(rgb)}
     
     # TODO Remove test data and replace it with functioning values
-    plant_values = {'diameter': 10,     #'diameter test',
-                    'height': 10,     #'height test',
-                    'leaf_area': 10,     #'leaf area test',
-                    'freshweight': 10,     #'fresh weight test',
-                    'dryweight': 10}     #'dry weight test'}
+    plant_values = {'diameter': random.randint(1,9999),
+                    'height': random.randint(1,9999),
+                    'leaf_area': random.randint(1,9999),
+                    'freshweight': random.randint(1,9999),
+                    'dryweight': random.randint(1,9999)}
     return flask.render_template('extraction.html', result_plant=plant_values)
 
 
 @app.route('/harvest', methods=['POST'])
 def predict_harvest():
-    # TODO Below code has been commented for front-end development purposes
-
-    features_whitelist = ["species", "height", "diameter", "leafarea", "freshweight", "dryweight"]
+    features_whitelist = [ "Height", "Diameter", "LeafArea", "FreshWeightShoot", "DryWeightShoot"] # + ["Variety"] # Variety is not (yet) included in frontend
     form_values = [flask.request.form.get(field) for field in features_whitelist]
+    prediction = tabular_predictor.predict(form_values)
 
-    print(form_values)
+    # TODO: This does not seem to be the right format, if so, format it correctly
+    predicted_date = prediction[0]
 
-    # processed = Data.process_plant_values(form_values)
-    prediction = tabular_predictor.predict()
-
-    print(prediction)
-
-    # TODO load model, make pred
-    predicted_date = '11/09/2001'
+    # predicted_date = '11/09/2001'
     return flask.render_template('result.html', result_time=predicted_date)
 
 if __name__ == '__main__':
     app.run()
-
-#%%
