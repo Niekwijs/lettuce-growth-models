@@ -15,6 +15,7 @@ class Data:
         data_json = json.loads(f.read())["Measurements"]
         vs = data_json.values()
         df = pd.json_normalize(vs)
+        df["Week"] = df.groupby("Variety").cumcount() + 1
         return df
 
     def process_img(self, img):
