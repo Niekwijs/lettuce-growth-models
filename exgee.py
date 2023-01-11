@@ -21,7 +21,16 @@ def load_data(data_file):
 
 def split_data(df):
     # Split the data into train and test sets
-    train_data, test_data = train_test_split(df, test_size=0.2)
+    # train_data, test_data = train_test_split(df, test_size=0.2)
+
+    # Maak een TimeSeriesSplit-object met één split
+    from sklearn.model_selection import TimeSeriesSplit
+    tscv = TimeSeriesSplit(n_splits=5)
+
+    # Splits de data in train- en testdata
+    for train_index, test_index in tscv.split(df):
+        train_data = df.iloc[train_index]
+        test_data = df.iloc[test_index]
 
     # Select only the columns with numerical data types
     numeric_cols = [col for col in df.columns if df[col].dtype in [np.int64, np.float64]]
@@ -85,24 +94,48 @@ def predict_week(model, crop_diameter, train_data):
             return i
     return -1  # Return -1 if the crop never reaches the specified diameter
 
-def evaluate_model_week(model, test_data):
-    # Make predictions on the test set
-    predictions = model.predict(test_data)
+# def evaluate_model_week(model, test_data):
+#     # Make predictions on the test set
+#     predictions = model.predict(test_data)
+#
+#     # Extract the true labels from the test data
+#     true_labels = test_data["Diameter"]
+#
+#     # Compute evaluation metrics
+#     accuracy = accuracy_score(true_labels, predictions)
+#     precision = precision_score(true_labels, predictions)
+#     recall = recall_score(true_labels, predictions)
+#     f1 = f1_score(true_labels, predictions)
+#
+#     # Print the evaluation metrics
+#     print(f"Accuracy: {accuracy:.2f}")
+#     print(f"Precision: {precision:.2f}")
+#     print(f"Recall: {recall:.2f}")
+#     print(f"F1 score: {f1:.2f}")
+def evaluate_model_week(model, test_data, crop_diameter):
+    # Predict the week in which the crop will reach the specified diameter
+    weeks = model.predict(test_data.drop(["ID", "Week"], axis=1))
+    predicted_weeks = []
+    for i, diameter in enumerate(weeks):
+        if diameter >= crop_diameter:
+            predicted_weeks.append(i)
 
-    # Extract the true labels from the test data
-    true_labels = test_data["Diameter"]
+    # Extract the true weeks from the test data
+    true_weeks = test_data["Week"]
+
+    true_weeks = true_weeks[:len(predicted_weeks)]
 
     # Compute evaluation metrics
-    accuracy = accuracy_score(true_labels, predictions)
-    precision = precision_score(true_labels, predictions)
-    recall = recall_score(true_labels, predictions)
-    f1 = f1_score(true_labels, predictions)
+    accuracy = accuracy_score(true_weeks, predicted_weeks)
+    # precision = precision_score(true_weeks, predicted_weeks)
+    # recall = recall_score(true_weeks, predicted_weeks)
+    # f1 = f1_score(true_weeks, predicted_weeks)
 
     # Print the evaluation metrics
     print(f"Accuracy: {accuracy:.2f}")
-    print(f"Precision: {precision:.2f}")
-    print(f"Recall: {recall:.2f}")
-    print(f"F1 score: {f1:.2f}")
+    # print(f"Precision: {precision:.2f}")
+    # print(f"Recall: {recall:.2f}")
+    # print(f"F1 score: {f1:.2f}")
 
 
 
@@ -153,9 +186,15 @@ if __name__ == "__main__":
     # Train the model
     model = train_model(train_data.drop(["ID", "Week"], axis=1))
 
-    # Evaluate the model on the test data
-    # results_df, predictions = evaluate_model(model, test_data)
 
+    test_dropped = test_data#.drop(["ID", "Week"], axis=1)
+
+    evaluate_model_week(model, test_dropped, 20)
+
+
+
+    ########################
+    # Evaluate the model on the test data
     rmse, mae, mape, results_df, predictions = evaluate_model(model, test_data)
 
 
