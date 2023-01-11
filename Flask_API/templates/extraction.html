@@ -11,9 +11,9 @@
 
   <body>
     <div id="content-wrapper">
+      <h1>Data extraction</h1>
       <p><img id="outputRGB" width="200" /></p>
       <p><img id="outputDepth" width="200" /></p>
-      <div id="root">
         <div class="extraction__content">
           <div class="extractionImage__data-wrapper">
             <div class="extractionImage__data-item">
@@ -37,13 +37,12 @@
               <div class="data-item__value">{{ result_plant.dryweight }}</div>
             </div>
           </div>
-          <form action="{{ url_for('predict_harvest') }}" enctype=multipart/form-data method="post">
-            <label class="custom-file-upload">
-              <input type="submit" />
-                Show result
-            </label>
-          </form>
-        </div>
+        <form action="{{ url_for('predict_harvest') }}" enctype=multipart/form-data method="post">
+          <label class="custom-file-upload">
+            <input type="submit" />
+              Show result
+          </label>
+        </form>
       </div>
     </div>
   </body>

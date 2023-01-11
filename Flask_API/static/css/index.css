@@ -1,11 +1,17 @@
 :root {
     --light-green: #4BA064;
     --dark-green: #033323;
-    --faded-green: #6B8D81;
+    /* --faded-green: #6B8D81; */
+    --faded-green: #A8BDB5;
     --alert-red: #FF5E5E;
     --dark-yellow: #D4A936;
     --yellow: #F7C500;
     --grey: #F3F1EF;
+}
+
+h1 {
+    margin: 0;
+    color: var(--dark-green);
 }
 
 .extraction__content {
@@ -17,6 +23,7 @@
 .extractionImage__data-item {
     display: flex;
     justify-content: space-between;
+    color: var(--dark-green);
     padding: 6px;
     border-radius: 4px;
 }
@@ -45,6 +52,7 @@ body {
 }
 
 button, .custom-file-upload {
+    display: flex;
     transition: all;
     transition-duration: 300ms;
     background-color: var(--dark-green);
@@ -76,14 +84,32 @@ img {
     justify-content: center;
 }
 
+.home__form {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+}
+
 .result__wrapper {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    color: var(--dark-green);
+    background-color: var(--faded-green);
+    margin-bottom: 12px;
+    padding: 6px;
+    border-radius: 4px;
+}
+
+.result__form {
+    display: flex;
+    justify-content: center;
 }
 
 #content-wrapper {
     padding: 12px;
     border-radius: 12px;
+    min-width: 320px;
     background-color: var(--grey);
 }
 

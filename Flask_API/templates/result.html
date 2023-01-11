@@ -11,13 +11,19 @@
 
   <body>
     <div id="content-wrapper">
-      <div class="result__wrapper">
-        <div>Expected harvest date</div>
-        <div>{{ result_time }}</div>
-      </div>
+      <h1>Result</h1>
       <p><img id="outputRGB" width="200" /></p>
       <p><img id="outputDepth" width="200" /></p>
-      <div id="root"></div>
+      <div class="result__wrapper">
+        <div>Expected harvest date:</div>
+        <div>{{ result_time }}</div>
+      </div>
+      <form class="result__form" action="{{ url_for('index') }}" enctype=multipart/form-data method="post">
+        <label class="custom-file-upload">
+          <input type="submit" />
+            Back to home
+        </label>
+      </form>
     </div>
   </body>
 

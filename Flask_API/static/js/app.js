@@ -3,39 +3,39 @@ var images = {
     depth: ''
 }
 
-function loadPage(route) {
-    $("#root").load(route, function (statusTxt, jqXHR) {
-        if (statusTxt == "success") {
-            alert("New content loaded successfully!");
-        }
-        if (statusTxt == "error") {
-            alert("Error: " + jqXHR.status + " " + jqXHR.statusText);
-        }
-    });
-}
+// function loadPage(route) {
+//     $("#root").load(route, function (statusTxt, jqXHR) {
+//         if (statusTxt == "success") {
+//             alert("New content loaded successfully!");
+//         }
+//         if (statusTxt == "error") {
+//             alert("Error: " + jqXHR.status + " " + jqXHR.statusText);
+//         }
+//     });
+// }
 
-$(document).ready(function () {
-    $("#root").load("../templates/home.html", function (statusTxt, jqXHR) {
-        if (statusTxt == "success") {
-            alert("New content loaded successfully!");
-        }
-        if (statusTxt == "error") {
-            alert("Error: " + jqXHR.status + " " + jqXHR.statusText);
-        }
-    });
+// $(document).ready(function () {
+//     $("#root").load("../templates/home.html", function (statusTxt, jqXHR) {
+//         if (statusTxt == "success") {
+//             alert("New content loaded successfully!");
+//         }
+//         if (statusTxt == "error") {
+//             alert("Error: " + jqXHR.status + " " + jqXHR.statusText);
+//         }
+//     });
 
-    $("#extraction-button").click(function () {
-        loadPage('../templates/extraction.html')
-    });
+//     $("#extraction-button").click(function () {
+//         loadPage('../templates/extraction.html')
+//     });
 
-    $("#home-button").click(function () {
-        loadPage('../templates/home.html')
-    });
+//     $("#home-button").click(function () {
+//         loadPage('../templates/home.html')
+//     });
 
-    $("#result-button").click(function () {
-        loadPage('../templates/result.html')
-    });
-});
+//     $("#result-button").click(function () {
+//         loadPage('../templates/result.html')
+//     });
+// });
 
 function loadRGBFile(event) {
     images.rgb = URL.createObjectURL(event.target.files[0]);
@@ -47,14 +47,14 @@ function loadDepthFile(event) {
     document.getElementById('outputDepth').src = images.depth;
 };
 
-function extractFeatures() {
-    $.post("/image", {
-        rgb: images.rgb,
-        depth: images.depth
-    })
-    // loadPage('../templates/extraction.html')
-}
+// function extractFeatures() {
+//     $.post("/image", {
+//         rgb: images.rgb,
+//         depth: images.depth
+//     })
+//     // loadPage('../templates/extraction.html')
+// }
 
-function showResult() {
-    loadPage('../templates/result.html')
-}
+// function showResult() {
+//     loadPage('../templates/result.html')
+// }
