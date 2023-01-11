@@ -3,28 +3,30 @@ from data_processing import Data
 import tensorflow as tf
 import numpy as np
 
-app = flask.Flask(__name__)
+app = flask.Flask(__name__, template_folder='./templates')
 
 print('Loading models...')
-diameter = tf.keras.models.load_model('../Plant_variable_predictor/checkpoints/rgb_diameter')
-height = tf.keras.models.load_model('../Plant_variable_predictor/checkpoints/depth_height')
-leaf_area = tf.keras.models.load_model('../Plant_variable_predictor/checkpoints/rgb_augm_leafarea')
-fresh_weight = tf.keras.models.load_model('../Plant_variable_predictor/checkpoints/rgb-d_freshweight')
-dry_weight = tf.keras.models.load_model('../Plant_variable_predictor/checkpoints/rgb_dryweight')
+# diameter = tf.keras.models.load_model('../Plant_variable_predictor/checkpoints/rgb_diameter')
+# height = tf.keras.models.load_model('../Plant_variable_predictor/checkpoints/depth_height')
+# leaf_area = tf.keras.models.load_model('../Plant_variable_predictor/checkpoints/rgb_augm_leafarea')
+# fresh_weight = tf.keras.models.load_model('../Plant_variable_predictor/checkpoints/rgb-d_freshweight')
+# dry_weight = tf.keras.models.load_model('../Plant_variable_predictor/checkpoints/rgb_dryweight')
 print('Models loaded.')
 
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    return flask.render_template('index.html')
-
+    return flask.render_template('home.html')
 
 @app.route('/image', methods=['POST'])
 def predict_image():
     rgb = flask.request.files.get('rgb', '')
     depth = flask.request.files.get('depth', '')
-    rgb = Data.process_img(rgb)
-    depth = depth.process_img(rgb)
+    
+    data = Data()
+    
+    rgb = data.process_img(rgb)
+    depth = data.process_img(depth)
 
     plant_values = {'diameter': diameter.predict(rgb),
                     'height': height.predict(depth),
@@ -45,7 +47,6 @@ def predict_harvest():
     # TODO load model, make pred
     predicted_date = '11/09/2001'
     return flask.render_template('result.html', result_time=predicted_date)
-
 
 if __name__ == '__main__':
     app.run()

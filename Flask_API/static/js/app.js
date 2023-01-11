@@ -1,4 +1,7 @@
-var image = ''
+var images = {
+    rgb: '',
+    depth: ''
+}
 
 function loadPage(route) {
     $("#root").load(route, function (statusTxt, jqXHR) {
@@ -12,7 +15,7 @@ function loadPage(route) {
 }
 
 $(document).ready(function () {
-    $("#root").load("../templates/views/home.html", function (statusTxt, jqXHR) {
+    $("#root").load("../templates/home.html", function (statusTxt, jqXHR) {
         if (statusTxt == "success") {
             alert("New content loaded successfully!");
         }
@@ -34,24 +37,24 @@ $(document).ready(function () {
     });
 });
 
-function loadFile(event) {
-    image = URL.createObjectURL(event.target.files[0]);
-    document.getElementById('output').src = image;
+function loadRGBFile(event) {
+    images.rgb = URL.createObjectURL(event.target.files[0]);
+    document.getElementById('outputRGB').src = images.rgb;
 };
 
-function checkExist(elementId) {
-    setInterval(function () {
-        if ($(elementId).length) {
-            console.log("Exists!");
-            clearInterval(checkExist);
-            document.getElementById('elementId').src = image
-        }
-    }, 100);
-}
-
+function loadDepthFile(event) {
+    images.depth = URL.createObjectURL(event.target.files[0]);
+    document.getElementById('outputDepth').src = images.depth;
+};
 
 function extractFeatures() {
-    console.log(image)
-    loadPage('../templates/extraction.html')
-    checkExist('extractionImage')
+    $.post("/image", {
+        rgb: images.rgb,
+        depth: images.depth
+    })
+    // loadPage('../templates/extraction.html')
+}
+
+function showResult() {
+    loadPage('../templates/result.html')
 }

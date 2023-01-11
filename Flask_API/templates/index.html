@@ -9,15 +9,19 @@
     <link rel="stylesheet" href="../static/css/index.css" />
   </head>
 
-  <body>
-    <div id="root"></div>
-  </body>
-
-  <footer>
+  <header>
     <button type="button" id="extraction-button">Extraction</button>
     <button type="button" id="home-button">Home</button>
     <button type="button" id="result-button">Result</button>
-  </footer>
+  </header>
+
+  <body>
+    <div id="content-wrapper">
+      <p><img id="outputRGB" width="200" /></p>
+      <p><img id="outputDepth" width="200" /></p>
+      <div id="root"></div>
+    </div>
+  </body>
 
   <script src="../static/js/app.js"></script>
 </html>
