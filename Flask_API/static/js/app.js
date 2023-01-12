@@ -52,33 +52,46 @@ function handleFileUpload(event, storageKey, imageVariable) {
     // Get the file from the input event
     const file = event.target.files[0];
 
-    // Create an object URL for the file
-    const objectURL = URL.createObjectURL(file);
+    // Create a new Image object
+    const img = new Image();
 
-    // Assign the object URL to the passed image variable
-    images[imageVariable] = objectURL;
+    // Add an event listener for when the image is loaded
+    img.addEventListener("load", () => {
+        // Calculate the new width and height based on the original dimensions and a desired scale factor
+        const newWidth = img.width * 0.3;
+        const newHeight = img.height * 0.3;
 
-    // Create a new FileReader
-    const reader = new FileReader();
+        // Create a canvas element
+        const canvas = document.createElement("canvas");
 
-    // Clear out previous data in the document storage
-    localStorage.removeItem(storageKey);
+        // Set the canvas to the desired size
+        canvas.width = newWidth;
+        canvas.height = newHeight;
 
-    // Add an event listener for when the file is loaded
-    reader.addEventListener("load", () => {
-        // Get the file"s data as a data URL
-        const dataURL = reader.result;
+        // Draw the image on the canvas
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, newWidth, newHeight);
+
+        // Get the data URL of the resized image
+        const dataURL = canvas.toDataURL();
 
         // Convert the data URL to a base64 string
         const base64 = dataURL.split(",")[1];
 
         // Store the base64 string in the document storage
         localStorage.setItem(storageKey, base64);
+
+        // Create an object URL for the file
+        const objectURL = URL.createObjectURL(file);
+
+        // Assign the object URL to the passed image variable
+        images[imageVariable] = objectURL;
     });
 
-    // Start reading the file
-    reader.readAsDataURL(file);
+    // Set the image's src to the selected file
+    img.src = URL.createObjectURL(file);
 }
+
 
 function loadRGBFile(event) {
     handleFileUpload(event, "rgbFile", "rgb");
