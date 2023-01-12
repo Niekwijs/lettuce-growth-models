@@ -10,9 +10,14 @@ import numpy as np
 app = flask.Flask(__name__, template_folder='./templates')
 
 print('Loading models...')
+
 # TODO: Load these from disk
 # diameter = tf.keras.models.load_model('../Plant_variable_predictor/checkpoints/rgb_diameter')
+diameter = tf.keras.models.load_model(r"../Plant_variable_predictor/checkpoints/rgb_augm_diameter/cp-0052.ckpt")
+
 # height = tf.keras.models.load_model('../Plant_variable_predictor/checkpoints/depth_height')
+height = tf.keras.models.load_model(r"../Plant_variable_predictor/checkpoints/depth_height/cp-0088.ckpt")
+
 # leaf_area = tf.keras.models.load_model('../Plant_variable_predictor/checkpoints/rgb_augm_leafarea')
 # fresh_weight = tf.keras.models.load_model('../Plant_variable_predictor/checkpoints/rgb-d_freshweight')
 # dry_weight = tf.keras.models.load_model('../Plant_variable_predictor/checkpoints/rgb_dryweight')
@@ -27,14 +32,21 @@ def index():
 
 @app.route('/image', methods=['POST'])
 def predict_image():
+
     # TODO Below code has been commented for front-end development purposes
-    # rgb = flask.request.files.get('rgb', '')
-    # depth = flask.request.files.get('depth', '')
+    rgb = flask.request.files.get('rgb').read()
+    # depth = flask.request.files.get('depth').read()
     
-    # data = Data()
-    
-    # rgb = data.process_img(rgb)
+    data = Data()
+
+    rgb = data.process_img(rgb)
     # depth = data.process_img(depth)
+
+
+
+    pred1 = diameter.predict(rgb)
+    print(pred1)
+
 
     # plant_values = {'diameter': diameter.predict(rgb),
     #                 'height': height.predict(depth),
