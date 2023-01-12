@@ -9,3 +9,4 @@ tmp/
 models/
 Flask_API/__pycache__
 
+*.pyc

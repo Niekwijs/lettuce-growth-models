@@ -13,10 +13,10 @@ print('Loading models...')
 
 # TODO: Load these from disk
 # diameter = tf.keras.models.load_model('../Plant_variable_predictor/checkpoints/rgb_diameter')
-diameter = tf.keras.models.load_model(r"../Plant_variable_predictor/checkpoints/rgb_augm_diameter/cp-0052.ckpt")
+diameter = tf.keras.models.load_model(r"../Plant_variable_predictor/checkpoints/rgb_augm_reg_diameter/cp-0029.ckpt")
 
 # height = tf.keras.models.load_model('../Plant_variable_predictor/checkpoints/depth_height')
-height = tf.keras.models.load_model(r"../Plant_variable_predictor/checkpoints/depth_height/cp-0088.ckpt")
+# height = tf.keras.models.load_model(r"../Plant_variable_predictor/checkpoints/depth_height/cp-0088.ckpt")
 
 # leaf_area = tf.keras.models.load_model('../Plant_variable_predictor/checkpoints/rgb_augm_leafarea')
 # fresh_weight = tf.keras.models.load_model('../Plant_variable_predictor/checkpoints/rgb-d_freshweight')
@@ -33,18 +33,43 @@ def index():
 @app.route('/image', methods=['POST'])
 def predict_image():
 
-    # TODO Below code has been commented for front-end development purposes
-    rgb = flask.request.files.get('rgb').read()
-    # depth = flask.request.files.get('depth').read()
-    
     data = Data()
 
-    rgb = data.process_img(rgb)
-    # depth = data.process_img(depth)
+    rgb_img_req = flask.request.files.get("rgb")
+    depth_img_req = flask.request.files.get("depth")
+
+    # Both files should be uploaded
+    # TODO: Check if this is how it is intended
+    assert rgb_img_req is not None
+    assert depth_img_req is not None
+
+    rgb_bytes_img = rgb_img_req.read()
+    depth_bytes_img = depth_img_req.read()
+
+    prepared_rgb_img = data.prepare_image(image=rgb_bytes_img,
+                                          image_type="rgb"
+                                          )
+    prepared_depth_img = data.prepare_image(image=rgb_bytes_img,
+                                            image_depth=depth_bytes_img,
+                                            image_type="rgbd"
+                                            )
+
+    # prepared_rgb_img_normalized = data.prepare_image(image=rgb_bytes_img,
+    #                                       image_type="rgb",
+    #                                       requires_normalization=True
+    #                                       )
+    # prepared_depth_img_normalized = data.prepare_image(image=depth_bytes_img,
+    #                                         image_type="rgbd",
+    #                                       requires_normalization=True
+    #                                         )
+
+    
 
 
 
-    pred1 = diameter.predict(rgb)
+
+
+    pred1 = diameter.predict(prepared_rgb_img)
     print(pred1)
 
 
