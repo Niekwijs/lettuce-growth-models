@@ -18,8 +18,9 @@ diameter = tf.keras.models.load_model(r"../Plant_variable_predictor/checkpoints/
 # height = tf.keras.models.load_model('../Plant_variable_predictor/checkpoints/depth_height')
 # height = tf.keras.models.load_model(r"../Plant_variable_predictor/checkpoints/depth_height/cp-0088.ckpt")
 
-# leaf_area = tf.keras.models.load_model('../Plant_variable_predictor/checkpoints/rgb_augm_leafarea')
+leaf_area = tf.keras.models.load_model("../Plant_variable_predictor/checkpoints/rgb_augm_reg_leafarea/cp-0035.ckpt")
 # fresh_weight = tf.keras.models.load_model('../Plant_variable_predictor/checkpoints/rgb-d_freshweight')
+
 # dry_weight = tf.keras.models.load_model('../Plant_variable_predictor/checkpoints/rgb_dryweight')
 
 
@@ -47,12 +48,16 @@ def predict_image():
     depth_bytes_img = depth_img_req.read()
 
     prepared_rgb_img = data.prepare_image(image=rgb_bytes_img,
-                                          image_type="rgb"
+                                          image_type="rgb",
+                                          requires_normalization=0
                                           )
-    prepared_depth_img = data.prepare_image(image=rgb_bytes_img,
-                                            image_depth=depth_bytes_img,
-                                            image_type="rgbd"
-                                            )
+    # prepared_depth_img = data.prepare_image(image=rgb_bytes_img,
+    #                                         image_depth=depth_bytes_img,
+    #                                         image_type="rgbd",
+    #                                         requires_normalization=0
+    #                                         )
+
+
 
     # prepared_rgb_img_normalized = data.prepare_image(image=rgb_bytes_img,
     #                                       image_type="rgb",
@@ -68,8 +73,8 @@ def predict_image():
 
 
 
-
-    pred1 = diameter.predict(prepared_rgb_img)
+    print(prepared_rgb_img.shape)
+    pred1 = leaf_area.predict(prepared_rgb_img)
     print(pred1)
 
 
