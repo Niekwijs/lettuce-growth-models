@@ -21,6 +21,7 @@
                 accept="image/*"
                 onchange="loadRGBFile(event)"
                 name="rgb"
+                required
               />
               Choose RGB image
             </label>
@@ -30,11 +31,12 @@
                 accept="image/*"
                 onchange="loadDepthFile(event)"
                 name="depth"
+                required
               />
               Choose Depth image
             </label>
 
-            <label class="custom-file-upload">
+            <label class="custom-file-upload__submit custom-file-upload">
               <input type="submit" />
               Extract features
             </label>

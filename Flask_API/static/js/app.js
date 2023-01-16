@@ -48,12 +48,12 @@ function handleFileUpload(event, storageKey, imageVariable) {
 }
 
 
-function loadRGBFile(imageURI) {
-    // handleFileUpload(event, "rgbFile", "rgb");
+function loadRGBFile(event) {
+    handleFileUpload(event, "rgbFile", "rgb");
     document.getElementById("outputRGB").src = "data:image/jpg;base64," + localStorage.getItem('rgbFile');
 }
 
 function loadDepthFile(event) {
-    // handleFileUpload(event, "depthFile", "depth");
+    handleFileUpload(event, "depthFile", "depth");
     document.getElementById("outputDepth").src = "data:image/jpg;base64," + localStorage.getItem('depthFile');
 }
