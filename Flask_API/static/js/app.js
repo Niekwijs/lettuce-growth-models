@@ -54,6 +54,6 @@ function loadRGBFile(imageURI) {
 }
 
 function loadDepthFile(event) {
-    handleFileUpload(event, "depthFile", "depth");
-    document.getElementById("outputDepth").src = "data:image/jpeg;base64," + images.depth;
+    // handleFileUpload(event, "depthFile", "depth");
+    document.getElementById("outputDepth").src = "data:image/jpg;base64," + localStorage.getItem('depthFile');
 }
