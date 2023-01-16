@@ -1,8 +1,8 @@
 from sklearn.dummy import DummyRegressor
 from sklearn.model_selection import train_test_split
 
-from Flask_API.data_processing import Data
-from Flask_API.todo_remove_this_later_random_predictor import RandomYPredictor
+from data_processing import Data
+from todo_remove_this_later_random_predictor import RandomYPredictor
 
 # features = ["Variety", "Height", "Diameter", "LeafArea", "FreshWeightShoot", "DryWeightShoot"]
 features = [ "Height", "Diameter", "LeafArea", "FreshWeightShoot", "DryWeightShoot"] # + ["Variety"] # Variety is not (yet) included in frontend

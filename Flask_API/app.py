@@ -2,7 +2,7 @@ import random
 
 import flask
 
-from Flask_API.tabular_predictor import tabular_predictor
+from tabular_predictor import tabular_predictor
 from data_processing import Data
 import tensorflow as tf
 import numpy as np
