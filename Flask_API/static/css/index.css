@@ -72,6 +72,11 @@ input[type="submit"], input[type="file"] {
     display: none;
 }
 
+form:invalid .custom-file-upload__submit {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
 img {
     max-height: 300px;
     width: auto;
