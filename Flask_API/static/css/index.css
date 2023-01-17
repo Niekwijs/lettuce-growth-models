@@ -36,13 +36,17 @@ h1 {
     background-color: var(--faded-green);
 }
 
+.extraction__dropdown {
+    margin-bottom: 12px;
+}
+
 .data-item__value {
     padding-left: 12px;
 }
 
 .data-item__input {
     border-radius: 4px;
-    max-width: 50px;
+    max-width: 80px;
 }
 
 html {
