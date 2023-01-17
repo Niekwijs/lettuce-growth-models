@@ -5,6 +5,7 @@ import pandas as pd
 from data_processing import Data
 import tensorflow as tf
 import numpy as np
+import datetime
 
 app = flask.Flask(__name__, template_folder='./templates')
 
@@ -67,15 +68,16 @@ def predict_harvest():
     form_values = [float(flask.request.form.get(field)) for field in features_whitelist]
     X = pd.DataFrame([form_values], columns=features_whitelist)
     variety = flask.request.form.get('variety')
-    if variety is not None:
+    if variety in data.varieties:
         X = data.process_plant_values(X, variety)
-        print(X)
         prediction = harvest.predict(X)
     else:
         prediction = harvest_wo_variety.predict(X)
 
-    # TODO date maken
-    return flask.render_template('result.html', result_time=prediction)
+    now = datetime.datetime.now()
+    predicted_date = now + datetime.timedelta(weeks=(data.max_weeks - prediction[0]))
+    predicted_date_formatted = predicted_date.strftime("%d/%m/%Y")
+    return flask.render_template('result.html', result_time=predicted_date_formatted)
 
 
 if __name__ == '__main__':

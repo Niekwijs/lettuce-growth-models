@@ -8,6 +8,7 @@ class Data:
     def __init__(self):
         self.tensor = self.read()
         self.img_resolution = 250
+        self.max_weeks = 10
         self.varieties = ['Satine', 'Salanova', 'Aphylion', 'Lugano']
 
     def read(self):
@@ -38,7 +39,6 @@ class Data:
 
     def process_plant_values(self, values, selected):
         dummies_df = pd.get_dummies(pd.DataFrame([self.varieties]), columns=self.varieties)
-        print(dummies_df)
         mask = dummies_df.columns == selected
         dummies_df.loc[:, mask] = 1
         dummies_df.loc[:, ~mask] = 0
