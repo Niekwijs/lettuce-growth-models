@@ -1,16 +1,14 @@
 import json
-from io import BytesIO
-
 import pandas as pd
 import numpy as np
 import cv2
-import tensorflow as tf
 
 
 class Data:
     def __init__(self):
         self.tensor = self.read()
         self.img_resolution = 250
+        self.varieties = ['Satine', 'Salanova', 'Aphylion', 'Lugano']
 
     def read(self):
         f = open("../data/measurements.json")
@@ -38,6 +36,11 @@ class Data:
                 "depth": np.reshape(image_depth, (1, self.img_resolution, self.img_resolution, 1))
                 }
 
-    def process_plant_values(self, values):
-        # TODO preprocessing for plant values to go into time series
-        return values
+    def process_plant_values(self, values, selected):
+        dummies_df = pd.get_dummies(pd.DataFrame([self.varieties]), columns=self.varieties)
+        print(dummies_df)
+        mask = dummies_df.columns == selected
+        dummies_df.loc[:, mask] = 1
+        dummies_df.loc[:, ~mask] = 0
+        df = pd.concat([values, dummies_df], axis=1)
+        return df
