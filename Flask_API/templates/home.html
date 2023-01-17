@@ -15,31 +15,44 @@
       <p><img id="outputDepth" width="200" /></p>
         <div class="home__wrapper">
           <form class="home__form" action="{{ url_for('predict_image') }}" enctype=multipart/form-data method="post">
-            <label class="custom-file-upload">
+            <div class="home__form-row">
+              <label class="custom-file-upload">
               <input
                 type="file"
                 accept="image/*"
                 onchange="handleFileUpload(event, 'rgbFile', 'rgb', 'outputRGB')"
                 name="rgb"
                 required
+                id="rgbInput"
               />
               Choose RGB image
-            </label>
-            <label class="custom-file-upload">
-              <input
-                type="file"
-                accept="image/*"
-                onchange="handleFileUpload(event, 'depthFile', 'depth', 'outputDepth')"
-                name="depth"
-                required
-              />
-              Choose Depth image
-            </label>
-
-            <label class="custom-file-upload__submit custom-file-upload">
-              <input type="submit" />
-              Extract features
-            </label>
+              </label>
+              <label class="custom-file-upload">
+                <input
+                  type="file"
+                  accept="image/*"
+                  onchange="handleFileUpload(event, 'depthFile', 'depth', 'outputDepth')"
+                  name="depth"
+                  required
+                  id="depthInput"
+                />
+                Choose Depth image
+              </label>
+            </div>
+            <div class="home__form-row">
+              <select name="variety" required>
+                <option value="">Select variety</option>
+                <option>All varieties</option>
+                <option value="Satine">Satine</option>
+                <option value="Salanova">Salanova</option>
+                <option value="Aphylion">Aphylion</option>
+                <option value="Lugano">Lugano</option>
+              </select>
+              <label class="custom-file-upload__submit custom-file-upload">
+                <input type="submit" />
+                Extract features
+              </label>
+            </div>
           </form>
         </div>
     </div>

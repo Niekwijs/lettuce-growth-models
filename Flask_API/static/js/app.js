@@ -3,6 +3,15 @@ window.onload = (event) => {
     if (localStorage.getItem('rgbFile') !== null && localStorage.getItem('depthFile') !== null) {
         document.getElementById("outputRGB").src = "data:image/jpg;base64," + localStorage.getItem('rgbFile');
         document.getElementById("outputDepth").src = "data:image/jpg;base64," + localStorage.getItem('depthFile');
+
+        // let rgbRoot = document.getElementById("outputRGB");
+        // let depthRoot = document.getElementById("outputDepth");
+
+        // let rgbInput = document.getElementById
+
+        // if (rgbRoot.src !== "" && depthRoot.src !== "") {
+        //     console.log('test')
+        // }
     }
 }
 
@@ -56,14 +65,4 @@ function handleFileUpload(event, storageKey, imageVariable, imgOutput) {
 
     // Set the image's src to the selected file
     img.src = URL.createObjectURL(file);
-}
-
-function loadRGBFile(event) {
-    handleFileUpload(event, "rgbFile", "rgb", "outputRGB");
-
-}
-
-function loadDepthFile(event) {
-    handleFileUpload(event, "depthFile", "depth");
-    document.getElementById("outputDepth").src = "data:image/jpg;base64," + localStorage.getItem('depthFile');
 }
