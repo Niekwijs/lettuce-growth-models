@@ -17,6 +17,7 @@ try:
     fresh_weight = tf.keras.models.load_model("../Plant_variable_predictor/checkpoints/rgb-d_freshweight/cp-0100.ckpt")
     dry_weight = tf.keras.models.load_model("../Plant_variable_predictor/checkpoints/rgb_dryweight/cp-0077.ckpt")
     harvest = pickle.load(open('../Forecasting/linear_model-all-varieties.sav', 'rb'))
+    harvest_wo_variety = pickle.load(open('../Forecasting/linear_model-all-varieties-no-dum.sav', 'rb'))
 except:
     print("Could not load models. Please check if the models are in the right directories.")
 
@@ -63,11 +64,16 @@ def predict_image():
 @app.route('/harvest', methods=['POST'])
 def predict_harvest():
     features_whitelist = ["FreshWeightShoot", "DryWeightShoot", "Height", "Diameter", "LeafArea"]
-    print(flask.request.form)
     form_values = [float(flask.request.form.get(field)) for field in features_whitelist]
-    form_values = pd.DataFrame([form_values])
-    print(form_values)
-    prediction = harvest.predict(form_values)
+    X = pd.DataFrame([form_values], columns=features_whitelist)
+    variety = flask.request.form.get('variety')
+    if variety is not None:
+        X = data.process_plant_values(X, variety)
+        print(X)
+        prediction = harvest.predict(X)
+    else:
+        prediction = harvest_wo_variety.predict(X)
+
     # TODO date maken
     return flask.render_template('result.html', result_time=prediction)
 
