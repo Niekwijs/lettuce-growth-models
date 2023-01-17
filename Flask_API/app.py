@@ -1,8 +1,7 @@
-import random
-
+import pickle
 import flask
+import pandas as pd
 
-from tabular_predictor import tabular_predictor
 from data_processing import Data
 import tensorflow as tf
 import numpy as np
@@ -11,94 +10,67 @@ app = flask.Flask(__name__, template_folder='./templates')
 
 print('Loading models...')
 
-# TODO: Load these from disk
-# diameter = tf.keras.models.load_model('../Plant_variable_predictor/checkpoints/rgb_diameter')
-diameter = tf.keras.models.load_model(r"../Plant_variable_predictor/checkpoints/rgb_augm_reg_diameter/cp-0029.ckpt")
-
-# height = tf.keras.models.load_model('../Plant_variable_predictor/checkpoints/depth_height')
-# height = tf.keras.models.load_model(r"../Plant_variable_predictor/checkpoints/depth_height/cp-0088.ckpt")
-
-# leaf_area = tf.keras.models.load_model('../Plant_variable_predictor/checkpoints/rgb_augm_leafarea')
-# fresh_weight = tf.keras.models.load_model('../Plant_variable_predictor/checkpoints/rgb-d_freshweight')
-# dry_weight = tf.keras.models.load_model('../Plant_variable_predictor/checkpoints/rgb_dryweight')
-
+try:
+    diameter = tf.keras.models.load_model(r"../Plant_variable_predictor/checkpoints/rgb_augm_reg_diameter/cp-0029.ckpt")
+    height = tf.keras.models.load_model(r"../Plant_variable_predictor/checkpoints/depth_reg_height/cp-0098.ckpt")
+    leaf_area = tf.keras.models.load_model("../Plant_variable_predictor/checkpoints/rgb_augm_reg_leafarea/cp-0035.ckpt")
+    fresh_weight = tf.keras.models.load_model("../Plant_variable_predictor/checkpoints/rgb-d_freshweight/cp-0100.ckpt")
+    dry_weight = tf.keras.models.load_model("../Plant_variable_predictor/checkpoints/rgb_dryweight/cp-0077.ckpt")
+    harvest = pickle.load(open('../Forecasting/linear_model-all-varieties.sav', 'rb'))
+except:
+    print("Could not load models. Please check if the models are in the right directories.")
 
 print('Models loaded.')
+
+data = Data()
 
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
     return flask.render_template('home.html')
 
+
 @app.route('/image', methods=['POST'])
 def predict_image():
+    rgb_img_req = flask.request.files.get("rgb")
+    depth_img_req = flask.request.files.get("depth")
 
-    # data = Data()
+    assert rgb_img_req is not None
+    assert depth_img_req is not None
 
-    # rgb_img_req = flask.request.files.get("rgb")
-    # depth_img_req = flask.request.files.get("depth")
+    rgb_bytes_img = rgb_img_req.read()
+    depth_bytes_img = depth_img_req.read()
 
-    # # Both files should be uploaded
-    # # TODO: Check if this is how it is intended
-    # assert rgb_img_req is not None
-    # assert depth_img_req is not None
+    normalized_images = data.prepare_images(image=rgb_bytes_img,
+                                            image_depth=depth_bytes_img,
+                                            requires_normalization=True)
 
-    # rgb_bytes_img = rgb_img_req.read()
-    # depth_bytes_img = depth_img_req.read()
+    not_normalized_images = data.prepare_images(image=rgb_bytes_img,
+                                                image_depth=depth_bytes_img,
+                                                requires_normalization=False)
 
-    # prepared_rgb_img = data.prepare_image(image=rgb_bytes_img,
-    #                                       image_type="rgb"
-    #                                       )
-    # prepared_depth_img = data.prepare_image(image=rgb_bytes_img,
-    #                                         image_depth=depth_bytes_img,
-    #                                         image_type="rgbd"
-    #                                         )
+    plant_values = {'diameter': diameter.predict(normalized_images['rgb'])[0][0],
+                    'height': height.predict(normalized_images['depth'])[0][0],
+                    'leaf_area': leaf_area.predict(normalized_images['rgb'])[0][0],
+                    'freshweight': fresh_weight.predict(
+                        np.concatenate((not_normalized_images['rgb'], not_normalized_images['depth']), axis=-1))[0][0],
+                    'dryweight': dry_weight.predict(not_normalized_images['rgb'])[0][0]}
 
-    # prepared_rgb_img_normalized = data.prepare_image(image=rgb_bytes_img,
-    #                                       image_type="rgb",
-    #                                       requires_normalization=True
-    #                                       )
-    # prepared_depth_img_normalized = data.prepare_image(image=depth_bytes_img,
-    #                                         image_type="rgbd",
-    #                                       requires_normalization=True
-    #                                         )
-
-    
-
-
-
-
-
-    # pred1 = diameter.predict(prepared_rgb_img)
-    # print(pred1)
-
-
-    # plant_values = {'diameter': diameter.predict(rgb),
-    #                 'height': height.predict(depth),
-    #                 'leaf_area': leaf_area.predict(rgb),
-    #                 'freshweight': fresh_weight.predict(np.dstack((rgb.numpy(), depth.numpy()))),
-    #                 'dryweight': dry_weight.predict(rgb)}
-    
-    # TODO Remove test data and replace it with functioning values
-    plant_values = {'diameter': random.randint(1,9999),
-                    'height': random.randint(1,9999),
-                    'leaf_area': random.randint(1,9999),
-                    'freshweight': random.randint(1,9999),
-                    'dryweight': random.randint(1,9999)}
+    print(plant_values['diameter'])
     return flask.render_template('extraction.html', result_plant=plant_values)
 
 
 @app.route('/harvest', methods=['POST'])
 def predict_harvest():
-    features_whitelist = [ "Height", "Diameter", "LeafArea", "FreshWeightShoot", "DryWeightShoot"] # + ["Variety"] # Variety is not (yet) included in frontend
-    form_values = [flask.request.form.get(field) for field in features_whitelist]
-    prediction = tabular_predictor.predict(form_values)
+    features_whitelist = ["FreshWeightShoot", "DryWeightShoot", "Height", "Diameter", "LeafArea"]
+    print(flask.request.form)
+    form_values = [float(flask.request.form.get(field)) for field in features_whitelist]
+    form_values = pd.DataFrame([form_values])
+    print(form_values)
+    prediction = harvest.predict(form_values)
+    # TODO date maken
+    return flask.render_template('result.html', result_time=prediction)
 
-    # TODO: This does not seem to be the right format, if so, format it correctly
-    predicted_date = prediction[0]
-
-    # predicted_date = '11/09/2001'
-    return flask.render_template('result.html', result_time=predicted_date)
 
 if __name__ == '__main__':
     app.run()
