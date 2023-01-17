@@ -18,12 +18,15 @@
         <div>Expected harvest date:</div>
         <div>{{ result_time }}</div>
       </div>
-      <form class="result__form" action="{{ url_for('index') }}" enctype=multipart/form-data method="post">
-        <label class="custom-file-upload">
-          <input type="submit" />
-            Back to home
-        </label>
-      </form>
+      <div class="result__nav-wrapper">
+        <button onclick="history.back()">Back to extraction</button>
+        <form class="result__form" action="{{ url_for('index') }}" enctype=multipart/form-data method="post">
+          <label class="custom-file-upload">
+            <input type="submit" />
+              Back to home
+          </label>
+        </form>
+      </div>
     </div>
   </body>
 
