@@ -19,7 +19,7 @@
               <input
                 type="file"
                 accept="image/*"
-                onchange="loadRGBFile(event)"
+                onchange="handleFileUpload(event, 'rgbFile', 'rgb', 'outputRGB')"
                 name="rgb"
                 required
               />
@@ -29,7 +29,7 @@
               <input
                 type="file"
                 accept="image/*"
-                onchange="loadDepthFile(event)"
+                onchange="handleFileUpload(event, 'depthFile', 'depth', 'outputDepth')"
                 name="depth"
                 required
               />

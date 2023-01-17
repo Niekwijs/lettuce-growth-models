@@ -33,26 +33,26 @@ def index():
 @app.route('/image', methods=['POST'])
 def predict_image():
 
-    data = Data()
+    # data = Data()
 
-    rgb_img_req = flask.request.files.get("rgb")
-    depth_img_req = flask.request.files.get("depth")
+    # rgb_img_req = flask.request.files.get("rgb")
+    # depth_img_req = flask.request.files.get("depth")
 
-    # Both files should be uploaded
-    # TODO: Check if this is how it is intended
-    assert rgb_img_req is not None
-    assert depth_img_req is not None
+    # # Both files should be uploaded
+    # # TODO: Check if this is how it is intended
+    # assert rgb_img_req is not None
+    # assert depth_img_req is not None
 
-    rgb_bytes_img = rgb_img_req.read()
-    depth_bytes_img = depth_img_req.read()
+    # rgb_bytes_img = rgb_img_req.read()
+    # depth_bytes_img = depth_img_req.read()
 
-    prepared_rgb_img = data.prepare_image(image=rgb_bytes_img,
-                                          image_type="rgb"
-                                          )
-    prepared_depth_img = data.prepare_image(image=rgb_bytes_img,
-                                            image_depth=depth_bytes_img,
-                                            image_type="rgbd"
-                                            )
+    # prepared_rgb_img = data.prepare_image(image=rgb_bytes_img,
+    #                                       image_type="rgb"
+    #                                       )
+    # prepared_depth_img = data.prepare_image(image=rgb_bytes_img,
+    #                                         image_depth=depth_bytes_img,
+    #                                         image_type="rgbd"
+    #                                         )
 
     # prepared_rgb_img_normalized = data.prepare_image(image=rgb_bytes_img,
     #                                       image_type="rgb",
@@ -69,8 +69,8 @@ def predict_image():
 
 
 
-    pred1 = diameter.predict(prepared_rgb_img)
-    print(pred1)
+    # pred1 = diameter.predict(prepared_rgb_img)
+    # print(pred1)
 
 
     # plant_values = {'diameter': diameter.predict(rgb),

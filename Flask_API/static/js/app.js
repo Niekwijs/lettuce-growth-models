@@ -1,9 +1,17 @@
+
+window.onload = (event) => {
+    if (localStorage.getItem('rgbFile') !== null && localStorage.getItem('depthFile') !== null) {
+        document.getElementById("outputRGB").src = "data:image/jpg;base64," + localStorage.getItem('rgbFile');
+        document.getElementById("outputDepth").src = "data:image/jpg;base64," + localStorage.getItem('depthFile');
+    }
+}
+
 var images = {
     rgb: '',
     depth: ''
 }
 
-function handleFileUpload(event, storageKey, imageVariable) {
+function handleFileUpload(event, storageKey, imageVariable, imgOutput) {
     // Get the file from the input event
     const file = event.target.files[0];
 
@@ -41,16 +49,18 @@ function handleFileUpload(event, storageKey, imageVariable) {
 
         // Assign the object URL to the passed image variable
         images[imageVariable] = objectURL;
+
+        // Set html image src to uploaded file
+        document.getElementById(imgOutput).src = "data:image/jpg;base64," + localStorage.getItem(storageKey);
     });
 
     // Set the image's src to the selected file
     img.src = URL.createObjectURL(file);
 }
 
-
 function loadRGBFile(event) {
-    handleFileUpload(event, "rgbFile", "rgb");
-    document.getElementById("outputRGB").src = "data:image/jpg;base64," + localStorage.getItem('rgbFile');
+    handleFileUpload(event, "rgbFile", "rgb", "outputRGB");
+
 }
 
 function loadDepthFile(event) {
