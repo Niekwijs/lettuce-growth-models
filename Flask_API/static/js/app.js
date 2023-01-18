@@ -86,3 +86,8 @@ function handleFileUpload(event, storageKey, imageVariable, imgOutput) {
     // Set the image's src to the selected file
     img.src = URL.createObjectURL(file);
 }
+
+function showLoader() {
+    console.log('test')
+    document.getElementById('loader').style.visibility = "visible"
+}

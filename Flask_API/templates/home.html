@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../static/css/index.css" />
   </head>
   <body>
+    <div id="loader" class="loader"><div class="lds-ring"><div></div><div></div><div></div><div></div></div></div>
     <div id="content-wrapper">
       <h1>Home</h1>
       <p><img id="outputRGB" width="200" /></p>
@@ -41,7 +42,7 @@
             </div>
             <div class="home__form-row">
               <label class="custom-file-upload__submit custom-file-upload">
-                <input type="submit" />
+                <input type="submit" onclick="showLoader()"/>
                 Extract features
               </label>
             </div>
