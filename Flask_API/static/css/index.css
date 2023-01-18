@@ -272,6 +272,7 @@ footer {
     background-color: var(--alert-red);
     color: white;
     width: 100vw;
-    padding: 12px;
+    padding-top: 12px;
+    padding-bottom: 12px;
     text-align: center;
 }

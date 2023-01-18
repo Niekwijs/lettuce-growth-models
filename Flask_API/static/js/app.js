@@ -4,11 +4,7 @@ var images = {
 }
 
 window.onload = (event) => {
-    if (document.URL.indexOf("index") > -1) {
-        alert("This is home");
-    }
-
-    if (localStorage.getItem('rgbFile') !== null && localStorage.getItem('depthFile') !== null) {
+    if (localStorage.getItem('rgbFile') !== null && localStorage.getItem('depthFile') !== null && document.getElementById("home-page") === null) {
         document.getElementById("outputRGB").src = "data:image/jpg;base64," + localStorage.getItem('rgbFile');
         document.getElementById("outputDepth").src = "data:image/jpg;base64," + localStorage.getItem('depthFile');
 
@@ -88,6 +84,5 @@ function handleFileUpload(event, storageKey, imageVariable, imgOutput) {
 }
 
 function showLoader() {
-    console.log('test')
     document.getElementById('loader').style.visibility = "visible"
 }
