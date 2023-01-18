@@ -11,7 +11,7 @@ class Data:
         self.varieties = ['Satine', 'Salanova', 'Aphylion', 'Lugano']
 
     def read(self):
-        f = open("../data/measurements.json")
+        f = open("./data/measurements.json")
         data_json = json.loads(f.read())["Measurements"]
         vs = data_json.values()
         df = pd.json_normalize(vs)
