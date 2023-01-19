@@ -84,7 +84,7 @@ def load_models():
             model['loading'] = True
             if model["type"] == "keras":
                 model["model"] = tf.keras.models.load_model(base_path + model["path"]) # This should ideally be done async, but probably not enough memory
-            elif mode["type"] == "pickle":
+            elif model["type"] == "pickle":
                 model["model"] = pickle.load(open(base_path + model["path"], "rb"))
             print(f"Finished loading model: {model['name']} -> {model['model']} ")
 
