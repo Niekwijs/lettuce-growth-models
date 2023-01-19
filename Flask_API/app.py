@@ -78,7 +78,7 @@ models = {
 def load_models():
     global models, loaded
     print("Started loading models...")
-    for model in models.items():
+    for _,model in models.items():
         if model["model"] is None and not model["loading"]:
             print(f"Started loading model: {model['name']} -> {model['model']} ")
             model['loading'] = True
@@ -105,13 +105,13 @@ def index():
         load_models()
 
     return flask.render_template('home.html',
-                                 fresh_weight_loaded=models["fresh_weight"]["loaded"],
-                                 diameter_loaded=models["diameter"]["loaded"],
-                                 height_loaded=models["height"]["loaded"],
-                                 leaf_area_loaded=models["leaf_area"]["loaded"],
-                                 dry_weight_loaded=models["dry_weight"]["loaded"],
-                                 harvest_loaded=models["harvest"]["loaded"],
-                                 harvest_wo_variety_loaded=models["harvest_wo_variety"]["loaded"])
+                                 fresh_weight_loaded=models["fresh_weight"]["loading"],
+                                 diameter_loaded=models["diameter"]["loading"],
+                                 height_loaded=models["height"]["loading"],
+                                 leaf_area_loaded=models["leaf_area"]["loading"],
+                                 dry_weight_loaded=models["dry_weight"]["loading"],
+                                 harvest_loaded=models["harvest"]["loading"],
+                                 harvest_wo_variety_loaded=models["harvest_wo_variety"]["loading"])
 
 
 @app.route('/image', methods=['POST'])
