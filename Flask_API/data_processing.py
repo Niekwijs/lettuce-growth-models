@@ -38,7 +38,7 @@ class Data:
                 }
 
     def process_plant_values(self, values, selected):
-        dummies_df = pd.get_dummies(pd.DataFrame([self.varieties]), columns=self.varieties)
+        dummies_df = pd.get_dummies(pd.DataFrame([self.varieties], columns=self.varieties))
         mask = dummies_df.columns == selected
         dummies_df.loc[:, mask] = 1
         dummies_df.loc[:, ~mask] = 0
