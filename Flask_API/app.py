@@ -20,57 +20,57 @@ base_path = "/modelstoragedrive/"
 
 loaded = False
 
-models = [
-    {
+models = {
+    "fresh_weight":{
         "name": "fresh_weight",
         "path": "rgb-d_freshweight/cp-0100.ckpt",
         "loading":False,
         "model":None,
         "type":"keras"
     },
-    {
+    "diameter":{
         "name": "diameter",
         "path": "rgb_augm_reg_diameter/cp-0029.ckpt",
         "loading":False,
         "model":None,
         "type":"keras"
     },
-    {
+    "height":{
         "name": "height",
         "path":"depth_reg_height/cp-0098.ckpt",
         "loading": False,
         "model": None,
         "type":"keras"
     },
-    {
+    "leaf_area":{
         "name": "leaf_area",
         "path":"rgb_augm_reg_leafarea/cp-0035.ckpt",
         "loading": False,
         "model": None,
         "type":"keras"
     },
-    {
+    "dry_weight":{
         "name": "dry_weight",
         "path":"rgb_dryweight/cp-0077.ckpt",
         "loading": False,
         "model": None,
         "type":"keras"
     },
-    {
+    "harvest":{
         "name": "harvest",
         "path": "Forecasting/linear_model-all-varieties.sav",
         "loading": False,
         "model": None,
         "type": "pickle"
     },
-    {
+    "harvest_wo_variety":{
         "name": "harvest_wo_variety",
         "path": "Forecasting/linear_model-all-varieties-no-dum.sav",
         "loading": False,
         "model": None,
         "type": "pickle"
     }
-]
+}
 
 
 
@@ -78,7 +78,7 @@ models = [
 def load_models():
     global models, loaded
     print("Started loading models...")
-    for model in models:
+    for model in models.items():
         if model["model"] is None and not model["loading"]:
             print(f"Started loading model: {model['name']} -> {model['model']} ")
             model['loading'] = True
@@ -105,13 +105,13 @@ def index():
         load_models()
 
     return flask.render_template('home.html',
-                                 fresh_weight_loaded=model["fresh_weight"]["loaded"],
-                                 diameter_loaded=model["diameter"]["loaded"],
-                                 height_loaded=model["height"]["loaded"],
-                                 leaf_area_loaded=model["leaf_area"]["loaded"],
-                                 dry_weight_loaded=model["dry_weight"]["loaded"],
-                                 harvest_loaded=model["harvest"]["loaded"],
-                                 harvest_wo_variety_loaded=model["harvest_wo_variety"]["loaded"])
+                                 fresh_weight_loaded=models["fresh_weight"]["loaded"],
+                                 diameter_loaded=models["diameter"]["loaded"],
+                                 height_loaded=models["height"]["loaded"],
+                                 leaf_area_loaded=models["leaf_area"]["loaded"],
+                                 dry_weight_loaded=models["dry_weight"]["loaded"],
+                                 harvest_loaded=models["harvest"]["loaded"],
+                                 harvest_wo_variety_loaded=models["harvest_wo_variety"]["loaded"])
 
 
 @app.route('/image', methods=['POST'])
