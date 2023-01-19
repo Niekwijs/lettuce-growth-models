@@ -121,9 +121,6 @@ def predict_image():
     rgb_img_req = flask.request.files.get("rgb")
     depth_img_req = flask.request.files.get("depth")
 
-    assert rgb_img_req is not None
-    assert depth_img_req is not None
-
     rgb_bytes_img = rgb_img_req.read()
     depth_bytes_img = depth_img_req.read()
 
@@ -139,8 +136,8 @@ def predict_image():
     plant_values = {'diameter': models["diameter"]["model"].predict(normalized_images['rgb'])[0][0],
                     'height': models["height"]["model"].predict(normalized_images['depth'])[0][0],
                     'leaf_area':  models["leaf_area"]["model"].predict(normalized_images['rgb'])[0][0],
-                    'dryweight':  models["'dryweight'"]["model"].predict(not_normalized_images['rgb'])[0][0],
-                    'freshweight': models["freshweight"]["model"].predict(
+                    'dryweight':  models["dry_weight"]["model"].predict(not_normalized_images['rgb'])[0][0],
+                    'freshweight': models["fresh_weight"]["model"].predict(
                         np.concatenate((not_normalized_images['rgb'], not_normalized_images['depth']), axis=-1))[0][0],
                     }
 
@@ -156,9 +153,9 @@ def predict_harvest():
     variety = flask.request.form.get('variety')
     if variety in data.varieties:
         X = data.process_plant_values(X, variety)
-        prediction = harvest.predict(X)
+        prediction = models["harvest"]["model"].predict(X)
     else:
-        prediction = harvest_wo_variety.predict(X)
+        prediction = models["harvest"]["model"].predict(X)
 
     now = datetime.datetime.now()
     predicted_date = now + datetime.timedelta(weeks=(data.max_weeks - prediction[0]))
@@ -167,4 +164,4 @@ def predict_harvest():
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0",port=8000 if ENVIRONMENT == "dev" else 443)
+    app.run(host="0.0.0.0", port=8000 if ENVIRONMENT == "dev" else 443)
