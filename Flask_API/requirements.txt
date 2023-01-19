@@ -3,3 +3,4 @@ Flask
 tensorflow
 numpy
 opencv-python-headless
+scikit-learn
