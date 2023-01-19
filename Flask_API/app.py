@@ -164,4 +164,4 @@ def predict_harvest():
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=8000 if ENVIRONMENT == "dev" else 443)
+    app.run(host="0.0.0.0", port=8000 if ENVIRONMENT == "dev" else 80)
