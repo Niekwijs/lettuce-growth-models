@@ -4,39 +4,9 @@ var images = {
 }
 
 window.onload = (event) => {
-    if (document.URL.indexOf("index") > -1) {
-        alert("This is home");
-    }
-
-    if (localStorage.getItem('rgbFile') !== null && localStorage.getItem('depthFile') !== null) {
+    if (localStorage.getItem('rgbFile') !== null && localStorage.getItem('depthFile') !== null && document.getElementById("home-page") === null) {
         document.getElementById("outputRGB").src = "data:image/jpg;base64," + localStorage.getItem('rgbFile');
         document.getElementById("outputDepth").src = "data:image/jpg;base64," + localStorage.getItem('depthFile');
-
-        // let rgbRoot = document.getElementById("outputRGB");
-        // let depthRoot = document.getElementById("outputDepth");
-
-        // let rgbInput = document.getElementById('rgbInput')
-        // let depthInput = document.getElementById('depthInput')
-
-        // if (rgbRoot.src !== "" && depthRoot.src !== "") {
-        //     fillInput('rgbFile', 'rgb.jpg', rgbInput)
-        //     fillInput('depthFile', 'depth.jpg', depthInput)
-        // }
-        //     }
-        // }
-
-        // function fillInput(file, fileName, fileSrcTarget) {
-        //     const dataTransfer = new DataTransfer();
-        //     const newFile = new File([localStorage.getItem(file)], fileName, {
-        //         type: 'image/jpg',
-        //         lastModified: new Date(),
-        //     });
-
-        //     dataTransfer.items.add(newFile);
-
-        //     fileSrcTarget.files = dataTransfer.files
-
-        //     dataTransfer.clearData()
     }
 }
 
@@ -85,4 +55,8 @@ function handleFileUpload(event, storageKey, imageVariable, imgOutput) {
 
     // Set the image's src to the selected file
     img.src = URL.createObjectURL(file);
+}
+
+function showLoader() {
+    document.getElementById('loader').style.visibility = "visible"
 }

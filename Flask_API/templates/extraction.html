@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Plantgroei UI</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/414b5ede38.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../static/css/index.css" />
   </head>
 
@@ -20,27 +21,73 @@
         <div class="extraction__content">
           <div class="extractionImage__data-wrapper">
             <div class="extractionImage__data-item">
-              <div class="data-item__title">Diameter:</div>
+              <div class="data-item__title">
+                Diameter:
+                <div class="tooltip">
+                  <i class="fa-regular fa-circle-question"></i>
+                  <div class="top">
+                    <p>This feature has been extracted from the RGB image.</p>
+                    <p>It represents the diameter of the plant measured in centimeters</p>
+                    <i></i>
+                  </div>
+                </div>
+              </div>
               <div class="data-item__value">
                 <input class="data-item__input" name="Diameter" value="{{ result_plant.diameter }}"></div>
             </div>
             <div class="extractionImage__data-item">
-              <div class="data-item__title">Fresh weight shoot:</div>
+              <div class="data-item__title">Fresh weight shoot:
+                <div class="tooltip">
+                  <i class="fa-regular fa-circle-question"></i>
+                  <div class="top">
+                    <p>This feature has been extracted from the RGB image</p>
+                    <p>This represents the plants weight including water content present in the plant</p>
+                    <i></i>
+                  </div>
+                </div>
+              </div>
               <div class="data-item__value">
                 <input class="data-item__input" name="FreshWeightShoot" value="{{ result_plant.freshweight }}"></div>
             </div>
             <div class="extractionImage__data-item">
-              <div class="data-item__title">Dry weight shoot:</div>
+              <div class="data-item__title">Dry weight shoot:
+                <div class="tooltip">
+                  <i class="fa-regular fa-circle-question"></i>
+                  <div class="top">   
+                    <p>This feature has been extracted from the RGB image</p>
+                    <p>This represents the plants weight excluding water content present in the plant</p>
+                    <i></i>
+                  </div>
+                </div>
+              </div>
               <div class="data-item__value">
                 <input class="data-item__input" name="DryWeightShoot" value="{{ result_plant.dryweight }}"></div>
             </div>
             <div class="extractionImage__data-item">
-              <div class="data-item__title">Leaf area:</div>
+              <div class="data-item__title">Leaf area:
+                <div class="tooltip">
+                  <i class="fa-regular fa-circle-question"></i>
+                  <div class="top">
+                    <p>This feature has been extracted from the depth image</p>
+                    <p>The amount of leaf material in the plant measured in cm²</p>
+                    <i></i>
+                  </div>
+                </div>
+              </div>
               <div class="data-item__value">
                 <input class="data-item__input" name="LeafArea" value="{{ result_plant.leaf_area }}"></div>
             </div>
             <div class="extractionImage__data-item">
-              <div class="data-item__title">Height:</div>
+              <div class="data-item__title">Height:
+                <div class="tooltip">
+                  <i class="fa-regular fa-circle-question"></i>
+                  <div class="top">
+                    <p>This feature has been extracted from the depth image</p>
+                    <p>Height of the plant measured in centimeters</p>
+                    <i></i>
+                  </div>
+                </div>
+              </div>
               <div class="data-item__value">
                 <input class="data-item__input" name="Height" value="{{ result_plant.height }}"></div>
             </div>
@@ -56,7 +103,7 @@
           </select>
 
           <label class="custom-file-upload custom-file-upload__submit">
-            <input type="submit" />
+            <input type="submit" onclick="showLoader()"/>
               Show result
           </label>
       </div>
