@@ -155,7 +155,7 @@ def predict_harvest():
         X = data.process_plant_values(X, variety)
         prediction = models["harvest"]["model"].predict(X)
     else:
-        prediction = models["harvest"]["model"].predict(X)
+        prediction = models["harvest_wo_variety"]["model"].predict(X)
 
     now = datetime.datetime.now()
     predicted_date = now + datetime.timedelta(weeks=(data.max_weeks - prediction[0]))
@@ -164,4 +164,7 @@ def predict_harvest():
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=8000 if ENVIRONMENT == "dev" else 80)
+    app.run(host="0.0.0.0",
+            debug=(ENVIRONMENT == "dev"),
+            port=(8000 if ENVIRONMENT == "dev" else 80)
+            )
