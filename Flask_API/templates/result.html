@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Plantgroei UI</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/414b5ede38.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../static/css/index.css" />
   </head>
 
@@ -20,7 +21,7 @@
       </div>
       <div class="result__nav-wrapper">
         <button onclick="history.back()">Back to extraction</button>
-        <form class="result__form" action="{{ url_for('index') }}" enctype=multipart/form-data method="post">
+        <form class="result__form" action="{{ url_for('navigate_home') }}" enctype=multipart/form-data method="post">
           <label class="custom-file-upload">
             <input type="submit" />
               Back to home

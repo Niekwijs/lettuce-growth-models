@@ -1,7 +1,7 @@
 :root {
     --light-green: #4BA064;
     --dark-green: #033323;
-    /* --faded-green: #6B8D81; */
+    --faded-green: #6B8D81;
     --faded-green: #A8BDB5;
     --alert-red: #FF5E5E;
     --dark-yellow: #D4A936;
@@ -166,6 +166,7 @@ html {
 
 body {
     background-color: var(--dark-green);
+    color: var(--dark-green);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -182,6 +183,7 @@ button, .custom-file-upload, select {
     padding: 12px 18px;
     border-radius: 4px;
     border: none;
+    justify-content: center;
 }
 
 select {
@@ -276,3 +278,113 @@ footer {
     padding-bottom: 12px;
     text-align: center;
 }
+
+.index__wrapper {
+    max-width: 500px;
+}
+
+.index__svg-wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.index__svg {
+    max-width: 350px;
+}
+
+.paragraph {
+    padding: 0px 18px;
+    margin-bottom: 40px;
+}
+
+.index__nav-button {
+    text-align: center;
+}
+
+/* FAQ + accordion */
+.faq {
+    max-width: 500px;
+}
+
+.faq__holder {
+    padding: 0 18px;
+}
+
+.faq__detail {
+    border-bottom: 1px solid hsl(240, 5%, 91%);
+    margin: 20px 0 0 0;
+    padding: 5px 0 20px 0;
+}
+
+.faq__summary:hover,
+.faq__summary:active { 
+    cursor: pointer; 
+}
+
+.faq__detail[open] > .faq__summary { 
+    font-weight: 700; 
+}
+
+.faq__summary {
+    list-style: none;
+  }
+
+.faq__summary::-webkit-details-marker {
+    display: none;
+  }
+
+.faq__summary { 
+    display: block;
+    padding: 0;
+    position: relative;
+    text-align: right;
+}
+
+    
+.faq__summary:after {
+    display: inline-block;
+    font-family: "Font Awesome 6 Free";
+    content: "\f0d7";
+    font-weight: 900;
+    background-repeat: no-repeat;
+    background-position: right center;
+    text-align: right;
+}
+  
+details[open] .faq__summary:after {
+    display: inline-block;
+    font-family: "Font Awesome 6 Free";
+    content: "\f0d8";
+    font-weight: 900;
+    background-repeat: no-repeat;
+    background-position: right center;
+    text-align: right;
+}
+  
+
+.faq__question {
+    left: 0;
+    position: absolute;
+    text-align: left;
+    top: 0;
+    width: 90%;
+}
+
+.faq__summary {
+    font-size: 1.4rem; 
+}
+
+.faq__summary:focus {
+    font-weight: bold;
+    outline: none;
+}
+
+.faq__text {
+    margin: 10px 0 0 0;
+}
+
+.hidden-lg { display: block; }
+    
+.visible-lg { display: none; }

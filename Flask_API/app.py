@@ -29,8 +29,15 @@ data = Data()
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    return flask.render_template('index.html')
+
+@app.route('/home', methods=['GET', 'POST'])
+def navigate_home():
     return flask.render_template('home.html')
 
+@app.route('/faq', methods=['GET', 'POST'])
+def navigate_faq():
+    return flask.render_template('faq.html')
 
 @app.route('/image', methods=['POST'])
 def predict_image():
