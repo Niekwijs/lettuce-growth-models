@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="5f2e5a3b-21eb-41a5-be6b-74eeb54f12a7" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Flask_API/requirements-old.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Flask_API/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/Flask_API/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Flask_API/static/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/Flask_API/static/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Flask_API/tabular_predictor.py" beforeDir="false" afterPath="$PROJECT_DIR$/Flask_API/tabular_predictor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flask_API/data_processing.py" beforeDir="false" afterPath="$PROJECT_DIR$/Flask_API/data_processing.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flask_API/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Flask_API/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Forecasting/GXBoost.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Forecasting/GXBoost.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Forecasting/linear-regression.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Forecasting/linear-regression.ipynb" afterDir="false" />
+    </list>
+    <list id="4aaa913c-e0b4-45f7-9e35-d099a5a7fa22" name="Changes by strawberrylime" comment="">
+      <change beforePath="$PROJECT_DIR$/Flask_API/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/Flask_API/app.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,18 +24,58 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="notebook://C:/school/minor-ai/lettuce-cnn/Analysis/analysis-order.ipynb" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="notebook://C:/school/minor-ai/lettuce-cnn/Forecasting/GXBoost.ipynb" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="notebook://C:/school/minor-ai/lettuce-cnn/Forecasting/gradient-boost.ipynb" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="notebook://C:/school/minor-ai/lettuce-cnn/Forecasting/prophet-prediction.ipynb" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Forecasting/timeseries_grid_search_comparisson.py" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="LineStatusTrackerManager">
+    <file path="$PROJECT_DIR$/Flask_API/app.py">
+      <ranges>
+        <range start1="0" end1="0" start2="0" end2="3" changelist="5f2e5a3b-21eb-41a5-be6b-74eeb54f12a7" />
+        <range start1="7" end1="7" start2="10" end2="13" changelist="4aaa913c-e0b4-45f7-9e35-d099a5a7fa22" />
+        <range start1="10" end1="11" start2="16" end2="92" changelist="5f2e5a3b-21eb-41a5-be6b-74eeb54f12a7" />
+        <range start1="12" end1="22" start2="93" end2="93" changelist="5f2e5a3b-21eb-41a5-be6b-74eeb54f12a7" />
+        <range start1="23" end1="24" start2="94" end2="95" changelist="5f2e5a3b-21eb-41a5-be6b-74eeb54f12a7" />
+        <range start1="30" end1="31" start2="101" end2="114" changelist="5f2e5a3b-21eb-41a5-be6b-74eeb54f12a7" />
+        <range start1="35" end1="35" start2="118" end2="119" changelist="4aaa913c-e0b4-45f7-9e35-d099a5a7fa22" />
+        <range start1="51" end1="51" start2="135" end2="136" changelist="4aaa913c-e0b4-45f7-9e35-d099a5a7fa22" />
+        <range start1="52" end1="56" start2="137" end2="142" changelist="5f2e5a3b-21eb-41a5-be6b-74eeb54f12a7" />
+        <range start1="57" end1="58" start2="143" end2="144" changelist="5f2e5a3b-21eb-41a5-be6b-74eeb54f12a7" />
+        <range start1="81" end1="82" start2="167" end2="168" changelist="5f2e5a3b-21eb-41a5-be6b-74eeb54f12a7" />
+      </ranges>
+    </file>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectId" id="2KGbmgpygTtRcdVK0FTed2NsDAv" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "last_opened_file_path": "C:/school/minor-ai/lettuce-cnn",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm"
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\school\minor-ai\lettuce-cnn\Flask_API\keras_models" />
+      <recent name="C:\school\minor-ai\lettuce-cnn\Flask_API\data" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -36,6 +86,8 @@
       <updated>1673604031158</updated>
       <workItem from="1673604033561" duration="19000" />
       <workItem from="1673604124111" duration="203000" />
+      <workItem from="1674037256105" duration="23000" />
+      <workItem from="1674037362780" duration="8582000" />
     </task>
     <servers />
   </component>
