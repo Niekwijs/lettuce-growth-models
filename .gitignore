@@ -10,3 +10,5 @@ models/
 Flask_API/__pycache__
 
 *.pyc
+html_page/assets/video/file_example_MP4_480_1_5MG.mp4
+html_page/assets/video/Oplevering-plantgroei-v1.mp4
